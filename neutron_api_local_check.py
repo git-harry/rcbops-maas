@@ -63,14 +63,14 @@ def check(args):
         metric('neutron_subnets', 'uint32', subnets)
 
 
-def main(args):
-    check(args)
-
-
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description='Check neutron API')
     parser.add_argument('ip',
                         type=IPv4Address,
                         help='neutron API IP address')
     args = parser.parse_args()
-    main(args)
+    check(args)
+
+
+if __name__ == "__main__":
+    main()

@@ -54,11 +54,7 @@ def check(args):
         metric_bool(name, service_is_up)
 
 
-def main(args):
-    check(args)
-
-
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description='Check nova services')
     parser.add_argument('ip',
                         type=IPv4Address,
@@ -69,4 +65,8 @@ if __name__ == "__main__":
                         default=None)
     args = parser.parse_args()
 
-    main(args)
+    check(args)
+
+
+if __name__ == "__main__":
+    main()

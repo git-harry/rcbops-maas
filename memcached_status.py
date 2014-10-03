@@ -43,7 +43,12 @@ def item_stats(host, port):
         return stats
 
 
-def main(args):
+def main():
+    parser = argparse.ArgumentParser(description='Check memcached status')
+    parser.add_argument('ip', type=IPv4Address, help='memcached IP address.')
+    parser.add_argument('--port', type=int,
+                        default=11211, help='memcached port.')
+    args = parser.parse_args()
 
     bind_ip = str(args.ip)
     port = args.port
@@ -69,9 +74,4 @@ def main(args):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Check memcached status')
-    parser.add_argument('ip', type=IPv4Address, help='memcached IP address.')
-    parser.add_argument('--port', type=int,
-                        default=11211, help='memcached port.')
-    args = parser.parse_args()
-    main(args)
+    main()

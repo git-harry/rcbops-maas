@@ -52,16 +52,16 @@ def check(args, tenant_id):
                'ms')
 
 
-def main(args):
+def main():
+    parser = argparse.ArgumentParser(description='Check heat API')
+    parser.add_argument('ip',
+                        type=IPv4Address,
+                        help='heat API IP address')
+    args = parser.parse_args()
     auth_ref = get_auth_ref()
     tenant_id = auth_ref['token']['tenant']['id']
     check(args, tenant_id)
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Check heat API')
-    parser.add_argument('ip',
-                        type=IPv4Address,
-                        help='heat API IP address')
-    args = parser.parse_args()
-    main(args)
+    main()

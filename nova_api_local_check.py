@@ -63,14 +63,14 @@ def check(args):
                    status_count[status])
 
 
-def main(args):
-    check(args)
-
-
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description='Check nova API')
     parser.add_argument('ip',
                         type=IPv4Address,
                         help='nova API IP address')
     args = parser.parse_args()
-    main(args)
+    check(args)
+
+
+if __name__ == "__main__":
+    main()

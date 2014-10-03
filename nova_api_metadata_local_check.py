@@ -51,13 +51,13 @@ def check(args):
                'ms')
 
 
-def main(args):
-    check(args)
-
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description='Check nova-api-metdata API')
     parser.add_argument('ip',
                         type=IPv4Address,
                         help='nova-api-metadata IP address')
     args = parser.parse_args()
-    main(args)
+    check(args)
+
+if __name__ == "__main__":
+    main()

@@ -52,15 +52,15 @@ def check(auth_ref, args):
         metric('glance_registry_local_response_time', 'uint32', milliseconds)
 
 
-def main(args):
-    auth_ref = get_auth_ref()
-    check(auth_ref, args)
-
-
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description='Check glance registry')
     parser.add_argument('ip',
                         type=IPv4Address,
                         help='glance registry IP address')
     args = parser.parse_args()
-    main(args)
+    auth_ref = get_auth_ref()
+    check(auth_ref, args)
+
+
+if __name__ == "__main__":
+    main()

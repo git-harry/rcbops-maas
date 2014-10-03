@@ -71,11 +71,7 @@ def check(auth_ref, args):
         metric_bool(name, service_is_up)
 
 
-def main(args):
-    auth_ref = get_auth_ref()
-    check(auth_ref, args)
-
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description='Check cinder services')
     parser.add_argument('ip',
                         type=IPv4Address,
@@ -84,4 +80,9 @@ if __name__ == "__main__":
                         type=str,
                         help='Only return metrics for the specified host')
     args = parser.parse_args()
-    main(args)
+    auth_ref = get_auth_ref()
+    check(auth_ref, args)
+
+
+if __name__ == "__main__":
+    main()

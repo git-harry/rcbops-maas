@@ -55,11 +55,7 @@ def check(args):
         metric_bool(name, agent_is_up)
 
 
-def main(args):
-    check(args)
-
-
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description='Check neutron agents')
     parser.add_argument('ip',
                         type=IPv4Address,
@@ -69,4 +65,8 @@ if __name__ == "__main__":
                         help='Only return metrics for specified host',
                         default=None)
     args = parser.parse_args()
-    main(args)
+    check(args)
+
+
+if __name__ == "__main__":
+    main()

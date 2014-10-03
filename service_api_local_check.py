@@ -68,11 +68,7 @@ def check(args):
                'ms')
 
 
-def main(args):
-    check(args)
-
-
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description='Check service is up.')
     parser.add_argument('name', help='Service name.')
     parser.add_argument('ip', type=IPv4Address, help='Service IP address.')
@@ -87,4 +83,8 @@ if __name__ == "__main__":
                         help='Should SSL be used.')
     parser.add_argument('--version', help='Service API version.')
     args = parser.parse_args()
-    main(args)
+    check(args)
+
+
+if __name__ == "__main__":
+    main()

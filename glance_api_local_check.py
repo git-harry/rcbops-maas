@@ -73,15 +73,15 @@ def check(auth_ref, args):
             metric('glance_%s_images' % status, 'uint32', status_count[status])
 
 
-def main(args):
-    auth_ref = get_auth_ref()
-    check(auth_ref, args)
-
-
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description='Check glance API')
     parser.add_argument('ip',
                         type=IPv4Address,
                         help='glance API IP address')
     args = parser.parse_args()
-    main(args)
+    auth_ref = get_auth_ref()
+    check(auth_ref, args)
+
+
+if __name__ == "__main__":
+    main()

@@ -57,14 +57,14 @@ def check(args):
         metric('keystone_tenant_count', 'uint32', tenant_count)
 
 
-def main(args):
-    check(args)
-
-
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description='Check keystone API')
     parser.add_argument('ip',
                         type=IPv4Address,
                         help='keystone API IP address')
     args = parser.parse_args()
-    main(args)
+    check(args)
+
+
+if __name__ == "__main__":
+    main()
