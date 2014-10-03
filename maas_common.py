@@ -14,12 +14,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
+
+with open('venv_path') as f:
+    path = f.readline()
+if path:
+    sys.path = [path]
+
+for module in dir():
+    reload(eval(module))
+
 import datetime
 import errno
 import json
 import os
 import re
-import sys
 
 AUTH_DETAILS = {'OS_USERNAME': None,
                 'OS_PASSWORD': None,
