@@ -23,7 +23,7 @@ from maas_common import status_ok, status_err, metric, metric_bool
 
 
 VERSION_RE = re.compile('STAT version (\d+\.\d+\.\d+)(?![-+0-9\\.])')
-VERSION = '1.4.14 (Ubuntu)'
+VERSIONS = ('1.4.13', '1.4.14 (Ubuntu)')
 MEMCACHE_METRICS = ['total_items',
                     'get_hits',
                     'get_misses',
@@ -61,10 +61,10 @@ def main():
         is_up = False
     else:
         is_up = True
-        if current_version != VERSION:
-            status_err('This plugin has only been tested with version %s '
-                       'of memcached, and you are using version %s'
-                       % (VERSION, current_version))
+        if current_version not in VERSIONS:
+            status_err('This plugin has only been tested with versions %s '
+                       'of memcached, and you are using version \'%s\''
+                       % (', '.join([repr(v) for v in VERSIONS]), current_version))
 
     status_ok()
     metric_bool('memcache_api_local_status', is_up)
