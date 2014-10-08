@@ -15,15 +15,13 @@
 # limitations under the License.
 
 import argparse
-from ipaddr import IPv4Address
 from maas_common import get_nova_client, status_err, status_ok, metric_bool
 
 
 def check(args):
 
-    COMPUTE_ENDPOINT = 'http://{ip}:8774/v3'.format(ip=args.ip)
     try:
-        nova = get_nova_client(bypass_url=COMPUTE_ENDPOINT)
+        nova = get_nova_client()
 
     # not gathering api status metric here so catch any exception
     except Exception as e:
@@ -56,9 +54,6 @@ def check(args):
 
 def main():
     parser = argparse.ArgumentParser(description='Check nova services')
-    parser.add_argument('ip',
-                        type=IPv4Address,
-                        help='nova API IP address')
     parser.add_argument('--host',
                         type=str,
                         help='Only return metrics for specified host',

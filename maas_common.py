@@ -135,7 +135,7 @@ else:
                 'compute',
                 auth_ref['serviceCatalog'])
 
-        nova = nova_client('3', auth_token=auth_token, bypass_url=bypass_url)
+        nova = nova_client('2', auth_token=auth_token, bypass_url=bypass_url)
 
         try:
             flavors = nova.flavors.list()
@@ -380,7 +380,7 @@ def get_auth_details(openrc_file=OPENRC):
 
 
 def get_endpoint_url_for_service(service_type, service_catalog,
-                                 url_type='publicURL'):
+                                 url_type='internalURL'):
     for i in service_catalog:
         if i['type'] == service_type:
             return i['endpoints'][0][url_type]
