@@ -391,6 +391,12 @@ def force_reauth():
     return keystone_auth(auth_details)
 
 
+def modify_endpoint_ip(service, ip):
+    auth_ref = get_auth_ref()
+    url = get_endpoint_url_for_service(service, auth_ref['serviceCatalog'])
+    return re.sub(r'([0-9]{1,3}\.){3}[0-9]{1,3}', ip, url)
+
+
 def status(status, message):
     if status in ('ok', 'warn', 'err'):
         raise ValueError('The status "%s" is not allowed because it creates a '

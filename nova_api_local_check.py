@@ -19,7 +19,7 @@ import collections
 from time import time
 from ipaddr import IPv4Address
 from maas_common import (get_nova_client, status_err, metric,
-                         status_ok, metric_bool)
+                         status_ok, metric_bool, modify_endpoint_ip)
 from novaclient.client import exceptions as exc
 
 SERVER_STATUSES = ['ACTIVE', 'STOPPED', 'ERROR']
@@ -27,7 +27,7 @@ SERVER_STATUSES = ['ACTIVE', 'STOPPED', 'ERROR']
 
 def check(args):
 
-    COMPUTE_ENDPOINT = 'http://{ip}:8774/v3'.format(ip=args.ip)
+    COMPUTE_ENDPOINT = modify_endpoint_ip('compute', str(args.ip))
 
     try:
         nova = get_nova_client(bypass_url=COMPUTE_ENDPOINT)
