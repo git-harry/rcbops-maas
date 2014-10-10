@@ -12,7 +12,8 @@ def utilisation(time):
     utils = [(d[0], d[-1]) for d in devices]
     return utils
 
-if __name__ == '__main__':
+
+def main():
     try:
         utils = utilisation(5)
     except Exception as e:
@@ -21,3 +22,7 @@ if __name__ == '__main__':
         status_ok()
         for util in utils:
             metric('disk_utilisation_%s' % util[0], 'double', util[1], '%')
+
+
+if __name__ == '__main__':
+    main()
