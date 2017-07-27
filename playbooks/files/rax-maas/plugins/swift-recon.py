@@ -66,14 +66,14 @@ def recon_output(for_ring, options=None):
     """
 
     # grab the current release
-    with open("/etc/openstack-release") as f:
+    with open("/etc/rpc-release") as f:
         for line in f.readlines():
             if line.startswith('DISTRIB_RELEASE'):
-                openstack_version = line.split("=")[-1].strip().strip('"')
+                rpc_version = line.split("=")[-1].strip().strip('"')
                 break
         else:
             raise SystemExit(
-                'DISTRIB_RELEASE not found in "/etc/openstack-release"'
+                'DISTRIB_RELEASE not found in "/etc/rpc-release"'
             )
 
     # identify the container we will use for monitoring
@@ -87,10 +87,10 @@ def recon_output(for_ring, options=None):
                    m_name='maas_swift')
 
     # kilo didn't have venvs so check if kilo
-    if openstack_version == "11.2.17":
+    if rpc_version.startswith("r11."):
         swift_recon_path = '/usr/local/bin/'
     else:
-        venv_path = '/openstack/venvs/swift-%s/bin' % (openstack_version)
+        venv_path = '/openstack/venvs/swift-%s/bin' % (rpc_version)
         swift_recon_path = 'source %s/activate; python2.7 %s/' % (venv_path,
                                                                   venv_path)
 
